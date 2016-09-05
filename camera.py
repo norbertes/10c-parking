@@ -54,7 +54,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # plt.subplot(1,3,3), plt.imshow(M, 'gray'), plt.title('Magnitude')
 
     # Otsu - Black and white edges
-    ret, binary = cv2.threshold(image,127,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU) # cv2.threshold(M,127,255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+    ret, binary = cv2.threshold(image,127,225,cv2.THRESH_OTSU) # cv2.threshold(M,127,255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
     # plt.figure(), plt.imshow(binary, 'gray')
 
     # Closing - morphological noise removal

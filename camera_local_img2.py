@@ -10,6 +10,7 @@ if clasificator is 'cars':
 elif clasificator is 'cas1':
     cascade_src = './cas1.xml'
 
+
 car_cascade = cv2.CascadeClassifier(cascade_src)
 
 # grab the raw NumPy array representing the image,
@@ -23,16 +24,26 @@ if image is None:
     exit(-1)
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+blurred = cv2.GaussianBlur(gray, (13, 13), 0)
+
+# changed_image = cv2.Canny(blurred, 10, 200)
+# edges = cv2.Canny(blurred, 10, 300)
+
+changed_image = cv2.fastNlMeansDenoising(blurred, None, 7, 21, 8)
+
+# changed_image = gray
+# cv2.imwrite('./last_image.jpg', changed_image, [int(cv2.IMWRITE_JPEG_QUALITY), 10])
+
 
 if clasificator is 'cars':
-    cars = car_cascade.detectMultiScale(gray,
+    cars = car_cascade.detectMultiScale(changed_image,
                                         scaleFactor=1.1,
                                         minNeighbors=1,
                                         minSize=(150, 150))
 
 elif clasificator is 'cas1':
-    cars = car_cascade.detectMultiScale(gray,
-                                        scaleFactor=1.2,
+    cars = car_cascade.detectMultiScale(changed_image,
+                                        scaleFactor=1.1515,
                                         minNeighbors=3,
                                         minSize=(150, 150),
                                         flags=cv2.cv.CV_HAAR_SCALE_IMAGE)
