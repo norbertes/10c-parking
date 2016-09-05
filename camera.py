@@ -75,10 +75,9 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     rect = cv2.boundingRect(points)
     cv2.rectangle(original,(rect[1],rect[0]), (rect[1]+rect[3], rect[0]+rect[2]),(255,255,255),thickness=2)
     original = cv2.cvtColor(original,cv2.COLOR_BGR2RGB)
-    plt.figure(), plt.imshow(original,'gray')
 
-
-    plt.show()
+    # plt.figure(), plt.imshow(original,'gray')
+    # plt.show()
 
     # show the frame
-    cv2.imshow("Frame", image)
+    cv2.imshow("Frame", original)
