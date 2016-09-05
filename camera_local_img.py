@@ -57,7 +57,7 @@ original = cv2.cvtColor(original,cv2.COLOR_BGR2RGB)
 
 
 
-cv2.imwrite('./last_image.png', original)
+cv2.imwrite('./last_image.jpg', original, [int(cv2.IMWRITE_JPEG_QUALITY), 10])
 
 target = open('./last_count.txt', 'w')
 target.truncate()

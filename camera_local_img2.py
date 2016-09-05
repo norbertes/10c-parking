@@ -23,7 +23,7 @@ for (x, y, w, h) in cars:
 
 cv2.imshow("Frame", image)
 
-cv2.imwrite('./last_image.png', image)
+cv2.imwrite('./last_image.jpg', image, [int(cv2.IMWRITE_JPEG_QUALITY), 10])
 
 target = open('./last_count.txt', 'w')
 target.truncate()

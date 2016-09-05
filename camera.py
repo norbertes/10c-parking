@@ -81,3 +81,4 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     # show the frame
     cv2.imshow("Frame", image)
+    cv2.imwrite('./last_image.jpg', image, [int(cv2.IMWRITE_JPEG_QUALITY), 10])
