@@ -15,7 +15,7 @@ rawCapture = PiRGBArray(camera, size=(640, 480))
 # allow the camera to warmup
 time.sleep(0.1)
 
-cascade_src = './cars.xml'
+cascade_src = './cas1.xml'
 car_cascade = cv2.CascadeClassifier(cascade_src)
 
 # capture frames from the camera
@@ -41,14 +41,14 @@ for frame in camera.capture_continuous(rawCapture,
         exit(-1)
 
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    cars = car_cascade.detectMultiScale(gray, 1.1, 1)
+    cars = car_cascade.detectMultiScale(gray, 1.9, 1)
 
     for (x, y, w, h) in cars:
         cv2.rectangle(image, (x, y), (x+w, y+h), (0, 0, 255), 2)
 
     cv2.imshow("Frame", image)
 
-    cv2.imwrite('./last_image.jpg', image, [int(cv2.IMWRITE_JPEG_QUALITY), 10])
+    cv2.imwrite('./backend/parking/static/last_image.jpg', image, [int(cv2.IMWRITE_JPEG_QUALITY), 10])
 
     target = open('./last_count.txt', 'w')
     target.truncate()
