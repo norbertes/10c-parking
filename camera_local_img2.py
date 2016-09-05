@@ -22,9 +22,6 @@ cars = car_cascade.detectMultiScale(gray,
                                     minSize=(150, 150),
                                     flags=cv2.cv.CV_HAAR_SCALE_IMAGE)
 
-# filter small obstacles
-
-
 for (x, y, w, h) in cars:
     cv2.rectangle(image, (x, y), (x+w, y+h), (0, 0, 255), 2)
 

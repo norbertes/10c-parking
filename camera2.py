@@ -41,7 +41,7 @@ for frame in camera.capture_continuous(rawCapture,
         exit(-1)
 
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    cars = car_cascade.detectMultiScale(gray, 1.9, 1)
+    cars = car_cascade.detectMultiScale(gray, 1.9, 1, minSize=(40, 40))
 
     for (x, y, w, h) in cars:
         cv2.rectangle(image, (x, y), (x+w, y+h), (0, 0, 255), 2)
