@@ -2,7 +2,14 @@
 import cv2
 import numpy as np
 
-cascade_src = './cas1.xml'
+clasificators = ['cars', 'cas1']
+clasificator = clasificators[1]
+
+if clasificator is 'cars':
+    cascade_src = './cars.xml'
+elif clasificator is 'cas1':
+    cascade_src = './cas1.xml'
+
 car_cascade = cv2.CascadeClassifier(cascade_src)
 
 # grab the raw NumPy array representing the image,
@@ -16,14 +23,22 @@ if image is None:
     exit(-1)
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-cars = car_cascade.detectMultiScale(gray,
-                                    scaleFactor=1.2,
-                                    minNeighbors=3,
-                                    minSize=(150, 150),
-                                    flags=cv2.cv.CV_HAAR_SCALE_IMAGE)
+
+if clasificator is 'cars':
+    cars = car_cascade.detectMultiScale(gray,
+                                        scaleFactor=1.1,
+                                        minNeighbors=1,
+                                        minSize=(150, 150))
+
+elif clasificator is 'cas1':
+    cars = car_cascade.detectMultiScale(gray,
+                                        scaleFactor=1.2,
+                                        minNeighbors=3,
+                                        minSize=(150, 150),
+                                        flags=cv2.cv.CV_HAAR_SCALE_IMAGE)
 
 for (x, y, w, h) in cars:
-    cv2.rectangle(image, (x, y), (x+w, y+h), (0, 0, 255), 2)
+    cv2.rectangle(image, (x, y), (x+w, y+h), (0, 0, 255), 4)
 
 cv2.imshow("Frame", image)
 
